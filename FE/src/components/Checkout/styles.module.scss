@@ -1,0 +1,624 @@
+.checkoutPageWrapper {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.checkoutPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.discountValue {
+  color: #e74c3c; // Màu nổi bật cho giá trị giảm giá
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.checkoutHeader {
+  text-align: center;
+  margin-bottom: 40px;
+
+  h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #333;
+  }
+}
+
+.checkoutSteps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  margin-top: 120px;
+
+  .step {
+    display: flex;
+    align-items: center;
+    color: #999;
+    font-weight: 500;
+
+    &.active {
+      color: #2a41e8;
+
+      .stepNumber {
+        background-color: #2a41e8;
+        color: white;
+      }
+    }
+
+    .stepNumber {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #e6e6e6;
+      color: #999;
+      margin-right: 10px;
+      font-weight: 600;
+    }
+  }
+
+  .stepDivider {
+    width: 100px;
+    height: 1px;
+    background-color: #e6e6e6;
+    margin: 0 15px;
+  }
+}
+
+.checkoutContainer {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 30px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkoutContent {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+}
+
+.formSection {
+  h2 {
+    font-size: 20px;
+    margin-bottom: 24px;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.formGroup {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+  }
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+
+  @media (max-width: 576px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formInput,
+.addressInput,
+.noteInput {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #2a41e8;
+  }
+}
+
+.addressInput,
+.noteInput {
+  resize: none;
+}
+
+.formActions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.backBtn,
+.continueBtn,
+.placeOrderBtn,
+.continueShoppingBtn {
+  padding: 14px 25px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  font-size: 15px;
+}
+
+.backBtn {
+  background-color: #f5f5f5;
+  color: #666;
+
+  &:hover {
+    background-color: #eaeaea;
+  }
+}
+
+.continueBtn,
+.placeOrderBtn {
+  background-color: #2a41e8;
+  color: white;
+
+  &:hover {
+    background-color: #1e32c8;
+  }
+
+  &:disabled {
+    background-color: #a8b1f0;
+    cursor: not-allowed;
+  }
+}
+
+.continueShoppingBtn {
+  background-color: #2a41e8;
+  color: white;
+  padding: 12px 20px;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: #1e32c8;
+  }
+}
+
+.orderSummary {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.cartItems {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 8px;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f2f2f2;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.itemImageContainer {
+  position: relative;
+  margin-right: 15px;
+}
+
+.itemImage {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #eee;
+}
+
+.itemQuantity {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #2a41e8;
+  color: white;
+  font-size: 12px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: 600;
+}
+
+.itemDetails {
+  flex: 1;
+
+  h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .itemSize {
+    font-size: 13px;
+    color: #888;
+  }
+}
+
+.itemPrice {
+  font-weight: 600;
+  color: #333;
+  font-size: 15px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 15px 0;
+}
+
+.summaryDetails {
+  .summaryRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+
+    span:first-child {
+      color: #666;
+    }
+
+    span:last-child {
+      color: #333;
+      font-weight: 500;
+    }
+  }
+
+  .discountValue {
+    color: #e34c4c !important;
+  }
+
+  .totalRow {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 5px;
+
+    span:first-child {
+      color: #333;
+    }
+
+    .totalAmount {
+      color: #2a41e8;
+    }
+  }
+
+  .taxNote {
+    font-size: 12px;
+    color: #999;
+    margin-top: 12px;
+    text-align: right;
+  }
+}
+
+.emptyCartContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  .emptyCartIcon {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .emptyCart {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+}
+
+.paymentMethods {
+  margin-bottom: 30px;
+}
+
+.paymentMethod {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #c4c4c4;
+  }
+
+  &.selected {
+    border-color: #2a41e8;
+    background-color: rgba(42, 65, 232, 0.05);
+  }
+
+  .paymentMethodRadio {
+    position: relative;
+    margin-right: 15px;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .radioCheckmark {
+      position: relative;
+      display: block;
+      height: 20px;
+      width: 20px;
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 50%;
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 3px;
+        left: 3px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #2a41e8;
+      }
+    }
+
+    input:checked~.radioCheckmark {
+      border-color: #2a41e8;
+
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  .paymentMethodIcon {
+    margin-right: 15px;
+    width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .paymentImage {
+      border-radius: 4px;
+    }
+  }
+
+  label {
+    font-weight: 500;
+    flex: 1;
+  }
+}
+
+.voucherSection {
+  margin-top: 30px;
+
+  h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+.errorMessage {
+  color: #e34c4c;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: rgba(227, 76, 76, 0.1);
+  border-radius: 5px;
+}
+
+
+
+// VNPay Badge
+.vnpayBadge {
+  margin-left: auto;
+  background: linear-gradient(135deg, #e8192c, #ff6b35);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+// VNPay Note box
+.vnpayNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: rgba(42, 65, 232, 0.06);
+  border: 1px solid rgba(42, 65, 232, 0.2);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+
+  span {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  p {
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+// VNPay Button (override placeOrderBtn)
+.vnpayBtn {
+  background: linear-gradient(135deg, #e8192c, #ff4455) !important;
+
+  &:hover {
+    background: linear-gradient(135deg, #c8121f, #e03040) !important;
+  }
+
+  &:disabled {
+    background: linear-gradient(135deg, #f0a0a8, #f0b0b8) !important;
+  }
+}
+
+// ── Shipping Method Cards ────────────────────────────────────────────────────
+.shippingMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.shippingMethodCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1.5px solid #e6e6e6;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+
+  &:hover {
+    border-color: #b0b8f5;
+    background: #fafbff;
+  }
+
+  &.shippingSelected {
+    border-color: #2a41e8;
+    background: rgba(42, 65, 232, 0.04);
+    box-shadow: 0 0 0 3px rgba(42, 65, 232, 0.08);
+  }
+}
+
+.shippingRadio {
+  position: relative;
+  flex-shrink: 0;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .shippingRadioMark {
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    background: white;
+    transition: all 0.2s;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: none;
+      top: 3px;
+      left: 3px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2a41e8;
+    }
+  }
+
+  input:checked~.shippingRadioMark {
+    border-color: #2a41e8;
+
+    &::after {
+      display: block;
+    }
+  }
+}
+
+.shippingIcon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.shippingInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2px;
+}
+
+.shippingName {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+.shippingDesc {
+  font-size: 12px;
+  color: #888;
+}
+
+.shippingFeeTag {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}

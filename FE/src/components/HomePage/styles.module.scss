@@ -1,0 +1,696 @@
+.tryOnOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+
+// 1. Nút Tải xuống + Làm mới – làm đẹp hơn, hiện đại hơn
+.resultButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  button {
+    padding: 12px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+
+    &:first-child {
+      background: #2563eb;
+      color: white;
+
+      &:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+      }
+    }
+
+    &:last-child {
+      background: #ef4444;
+      color: white;
+
+      &:hover {
+        background: #dc2626;
+        transform: translateY(-2px);
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// 2. Ảnh kết quả try-on: to hơn, căn giữa đẹp
+.resultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+
+  img {
+    max-width: 100%;
+    max-height: 75vh;           // Chiếm tối đa 75% chiều cao màn hình
+    width: auto;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    object-fit: contain;
+    background: #f9fafb;
+  }
+}
+
+// 3. Grid sản phẩm: 2 cột thay vì 3-4 cột như hiện tại
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);   // Chỉ 2 ảnh mỗi hàng
+  gap: 16px;
+  padding: 12px 8px;
+  max-height: 55vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 10px;
+  }
+}
+
+.productItem {
+  aspect-ratio: 1 / 1.4;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &.selected {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px #3b82f6;
+  }
+
+  &:hover:not(.selected) {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+    img {
+      transform: scale(1.05);
+    }
+  }
+}
+// Chỉnh lại .productItem – bỏ tên sản phẩm, chỉ giữ ảnh
+.productItem {
+  aspect-ratio: 1 / 1.4;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative; /* để hover hiệu ứng đẹp hơn */
+
+  // Ẩn hoàn toàn tên sản phẩm
+  .productName {
+    display: none !important;  // chắc chắn ẩn
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &.selected {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px #3b82f6;
+  }
+
+  &:hover:not(.selected) {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+
+    img {
+      transform: scale(1.08);
+    }
+  }
+}
+// Fix: ảnh preview người mẫu + trang phục bị không hiện / bị nhỏ / bị cắt
+.uploadPlaceholder {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;           // Đảm bảo đủ cao
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px dashed #cbd5e1;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #94a3b8;
+    background: #f1f5f9;
+  }
+}
+
+.previewWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;       // Quan trọng: hiện toàn bộ ảnh, không bị cắt
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .clearButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
+// Khi chưa có ảnh: hiện dấu + đẹp hơn
+.uploadText {
+  text-align: center;
+  color: #64748b;
+
+  .uploadPlus {
+    font-size: 48px;
+    font-weight: 300;
+    color: #94a3b8;
+    margin-bottom: 8px;
+  }
+}
+
+// Nếu bạn vẫn còn phần tên trong JSX (dòng <div className={styles.productName}>), thì thêm CSS này để chắc chắn ẩn nó
+// hoặc bạn có thể xóa luôn dòng đó trong JSX cũng được (tùy thích)
+
+// Bonus: làm cho ảnh to hơn, chiếm hết ô
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  padding: 12px 8px;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+// Bonus: làm đẹp phần preview sản phẩm đã chọn
+.selectedProductPreview {
+  text-align: center;
+  margin: 12px 0;
+  padding: 12px;
+  background: #f0f9ff;
+  border-radius: 12px;
+  border: 2px solid #0ea5e9;
+
+  img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
+  p {
+    margin-top: 8px;
+    font-weight: 600;
+    color: #1e40af;
+  }
+}
+
+// Đảm bảo khu vực hiển thị kết quả chiếm toàn bộ không gian
+.displayArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.resultContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.resultContainer img {
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.resultButtons {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.actionButton {
+  padding: 8px 16px;
+  background-color: #C00900; // Màu chính
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #E63933; // Màu hover nhạt hơn
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #E63933; // Đồng bộ với màu hover
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tryOnContainer {
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  max-width: 1600px;
+  height: 90vh;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 6px 16px rgba(192, 9, 0, 0.15);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 2px solid rgba(192, 9, 0, 0.2);
+  background-color: #c00900;
+  color: white;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 350px;
+  border-right: 2px solid rgba(192, 9, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.optionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  background-color: rgba(192, 9, 0, 0.05);
+  padding: 0.8rem;
+  border-radius: 0.375rem;
+  color: #c00900;
+  font-weight: bold;
+}
+
+.buttonGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.optionButton {
+  padding: 0.8rem;
+  background-color: #f8f8f8;
+  border: 2px solid #e0e0e0;
+  color: #333;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba(192, 9, 0, 0.05);
+    border-color: rgba(192, 9, 0, 0.3);
+  }
+
+  &.active {
+    background-color: #c00900;
+    color: white;
+    border-color: #c00900;
+  }
+}
+
+.uploadArea {
+  border: 3px dashed rgba(192, 9, 0, 0.3);
+  border-radius: 0.75rem;
+  height: 250px;
+  width: 200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: #c00900;
+    background-color: rgba(192, 9, 0, 0.03);
+  }
+}
+
+.uploadPlaceholder {
+  text-align: center;
+  color: #777;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.uploadPlus {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #c00900;
+}
+
+.previewWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 250px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.75rem;
+  overflow-y: auto;
+  background: #fff;
+  border: 2px dashed #ccc;
+  margin: 0 auto;
+}
+
+.previewImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.375rem;
+}
+
+.clearButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  padding: 4px;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+
+  &:hover {
+    background-color: #f8d7da;
+    color: #c00900;
+  }
+}
+
+.generateButton {
+  background-color: #c00900;
+  border: 2px solid #c00900;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 0.375rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #a00800;
+  }
+}
+
+.displayArea {
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.generatedImage {
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  max-height: 800px;
+  object-fit: contain;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.emptyState {
+  text-align: center;
+  color: #777;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #c00900;
+}
+
+.emptyText {
+  font-size: 1.5rem;
+  max-width: 500px;
+}
+
+.productSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.searchInput {
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: #c00900;
+  }
+}
+
+.selectedProductPreview {
+  border: 2px solid #e0e0e0;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+  width: 200px;
+  margin: 0 auto;
+  overflow-y: auto;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.8rem;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.375rem;
+}
+
+.productItem {
+  cursor: pointer;
+  padding: 0.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 0.375rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+
+  &.selected {
+    border-color: #c00900;
+    background-color: rgba(192, 9, 0, 0.05);
+  }
+}
+
+.productImage {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+}
+
+.productName {
+  font-size: 0.9rem;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .tryOnContainer {
+    width: 98%;
+    height: 95vh;
+  }
+
+  .sidebar {
+    width: 280px;
+    padding: 0.8rem;
+  }
+
+  .generatedImage {
+    max-width: 500px;
+    max-height: 500px;
+  }
+
+  .uploadArea {
+    height: 200px;
+    width: 180px;
+  }
+
+  .previewWrapper {
+    height: 200px;
+    width: 180px;
+  }
+
+  .selectedProductPreview {
+    height: 200px;
+    width: 180px;
+  }
+
+  .productGrid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    max-height: 150px;
+  }
+}

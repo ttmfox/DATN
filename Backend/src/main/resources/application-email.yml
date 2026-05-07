@@ -1,0 +1,5 @@
+email:
+  brevo:
+    key: ${BREVO_KEY}
+    sender: ${SENDER_EMAIL}
+    name: ${SENDER_NAME}

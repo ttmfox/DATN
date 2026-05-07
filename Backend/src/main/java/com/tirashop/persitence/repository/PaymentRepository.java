@@ -1,0 +1,16 @@
+package com.tirashop.persitence.repository;
+
+import com.tirashop.persitence.entity.Payment;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface PaymentRepository extends JpaRepository<Payment, Long> {
+
+    Optional<Payment> findFirstByOrderIdOrderByCreatedAtDesc(Long orderId);
+    List<Payment> findAllByOrderId(Long orderId);
+    Optional<Payment> findByOrderIdAndStatus(Long orderId, Payment.PaymentStatus status);
+}

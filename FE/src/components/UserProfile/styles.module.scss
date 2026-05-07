@@ -1,0 +1,278 @@
+/* UserProfile Styles */
+.profileContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 80px);
+  background-color: #f8fafc;
+  padding: 2rem 1rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  margin-top: 120px;
+}
+
+.profileCard {
+  width: 100%;
+  max-width: 720px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profileTitle {
+  color: #b91c1c;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  &::after {
+    content: '';
+    display: block;
+    margin: 0.75rem auto;
+    width: 64px;
+    height: 3px;
+    background-color: #b91c1c;
+    border-radius: 1.5px;
+  }
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 680px;
+}
+
+.profileAvatar {
+  margin-bottom: 1.5rem;
+}
+
+.avatarImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #b91c1c;
+  transition: border-color 0.3s ease;
+}
+
+.avatarPlaceholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #b91c1c;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.username {
+  color: #1f2937;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.infoRow {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping to prevent overlap */
+  width: 100%;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 2rem; /* Increased gap for more space */
+  align-items: flex-start;
+}
+
+.infoLabel {
+  flex: 0 0 30%; /* Maintain label width but allow wrapping */
+  font-weight: 700;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.5;
+  min-width: 120px; /* Minimum width to prevent collapse */
+}
+
+.infoValue {
+  flex: 1;
+  color: #4b5563;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  word-break: break-word; /* Ensure long words break */
+  min-width: 200px; /* Minimum width for value to prevent overlap */
+  text-align: left;
+}
+
+.editButton {
+  margin-top: 2rem;
+  background-color: #b91c1c;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: #991b1b;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.avatarEditSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.avatarContainer {
+  position: relative;
+  cursor: pointer;
+
+  &:hover .avatarOverlay {
+    opacity: 1;
+  }
+}
+
+.avatarOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(185, 28, 28, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 50%;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    color: #b91c1c;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  input, select {
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: #f8fafc;
+
+    &:focus {
+      outline: none;
+      border-color: #b91c1c;
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.1);
+      background-color: #ffffff;
+    }
+  }
+}
+
+.formButtons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.saveButton, .cancelButton {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.saveButton {
+  background-color: #b91c1c;
+  color: #ffffff;
+  border: none;
+
+  &:hover {
+    background-color: #991b1b;
+    transform: translateY(-1px);
+  }
+}
+
+.cancelButton {
+  background-color: #ffffff;
+  color: #b91c1c;
+  border: 2px solid #b91c1c;
+
+  &:hover {
+    background-color: #fef2f2;
+    transform: translateY(-1px);
+  }
+}
+
+.loadingSpinner {
+  color: #b91c1c;
+  font-size: 1.25rem;
+  text-align: center;
+  padding: 2rem;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .profileCard {
+    padding: 1.5rem;
+  }
+
+  .profileTitle {
+    font-size: 1.5rem;
+  }
+
+  .avatarImage, .avatarPlaceholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .infoRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+  }
+
+  .infoLabel, .infoValue {
+    flex: none;
+    width: 100%;
+    font-size: 0.95rem;
+    min-width: 0; /* Reset min-width for mobile */
+  }
+}

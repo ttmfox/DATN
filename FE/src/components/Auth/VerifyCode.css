@@ -1,0 +1,136 @@
+/* VerifyCode.css */
+.verify-code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.verify-code-box {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.verify-code-box:hover {
+  transform: translateY(-5px);
+}
+
+.verify-code-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.lock-icon {
+  font-size: 28px;
+  transition: transform 0.3s ease;
+}
+
+.verify-code-title:hover .lock-icon {
+  transform: rotate(20deg);
+}
+
+.verify-code-desc {
+  font-size: 15px;
+  color: #7f8c8d;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.verify-code-resend {
+  font-size: 15px;
+  color: #e74c3c;
+  margin-bottom: 25px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.verify-code-resend:hover {
+  color: #c0392b;
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.otp-input {
+  width: 50px;
+  height: 60px;
+  text-align: center;
+  font-size: 24px;
+  border: 2px solid #dfe6e9;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #f9fbfd;
+}
+
+.otp-input:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+  background: #ffffff;
+}
+
+.verify-code-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, #e74c3c, #c0392b);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.verify-code-btn:hover {
+  background: linear-gradient(90deg, #c0392b, #e74c3c);
+  box-shadow: 0 8px 15px rgba(231, 76, 60, 0.3);
+  transform: translateY(-2px);
+}
+
+.verify-code-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .verify-code-box {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  .verify-code-title {
+    font-size: 22px;
+  }
+
+  .verify-code-desc {
+    font-size: 14px;
+  }
+
+  .otp-input {
+    width: 45px;
+    height: 55px;
+    font-size: 20px;
+  }
+}

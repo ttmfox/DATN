@@ -1,0 +1,92 @@
+.bannerContainer {
+  padding: 40px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.imgBanner {
+  position: relative;
+  width: 100%;
+  height: 500px; // Chiều cao cố định cho banner
+  background-image: url("https://www.versace.com/dw/image/v2/BGWN_PRD/on/demandware.static/-/Library-Sites-ver-library/default/dw6ff2e31f/Homepage-New/SS25/hp-ss25-13022025-08-desk.jpg");
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  // Overlay để làm mờ nền và làm nổi bật nội dung
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); // Overlay tối với độ trong suốt 40%
+    z-index: 1;
+  }
+}
+
+.title {
+  position: relative;
+  z-index: 2; // Đảm bảo nội dung nằm trên overlay
+  text-align: center;
+  color: #fff; // Màu chữ trắng để nổi bật trên nền tối
+
+  h1 {
+    margin: 10px 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    max-width: 600px;
+  }
+
+  h2 {
+    margin: 10px 0 20px;
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+}
+
+.categoryButton {
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  padding: 8px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background: #fff;
+    color: #222;
+  }
+}
+
+.discoverButton {
+  background: #fff;
+  border: none;
+  color: #222;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background: #f5f5f5;
+    color: #555;
+  }
+}
