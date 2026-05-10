@@ -16,12 +16,6 @@ Trong frontend ở VSCode:
 Tk admin: shopadmin | 1
 Tk user: 
 
-Ngân hàng	NCB
-Số thẻ	9704198526191432198
-Tên chủ thẻ	NGUYEN VAN A
-Ngày phát hành	07/15
-Mật khẩu OTP	123456
-
 ==ngrok==
 
 ngrok config add-authtoken 2jpCd4K5b3sMJxLV30FJ3rCIBWN_2dofEsCGP7z98zXRUSgnm
